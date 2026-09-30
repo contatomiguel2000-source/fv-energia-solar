@@ -4,12 +4,13 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { company, nav, whatsappLink } from "@/lib/data";
 import { Button } from "./Button";
+import { asset } from "@/lib/base-path";
 
 export function Logo({ size = 46 }: { size?: number }) {
   return (
     <span className="flex items-center gap-2.5">
       <span className="flex shrink-0 items-center justify-center rounded-full bg-white" style={{ width: size, height: size }}>
-        <Image src="/img/logo.png" alt="" width={size - 6} height={size - 6} priority />
+        <Image src={asset("/img/logo.png")} alt="" width={size - 6} height={size - 6} priority />
       </span>
       <span className="text-[1.6rem] font-semibold leading-none tracking-[-0.05em] text-white">
         FV <span className="font-medium text-sun">Energia Solar</span>

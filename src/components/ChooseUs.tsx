@@ -5,6 +5,7 @@ import { useState } from "react";
 import { chooseUs, whatsappLink } from "@/lib/data";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
+import { asset } from "@/lib/base-path";
 
 export function ChooseUs() {
   const [active, setActive] = useState(0);
@@ -67,7 +68,7 @@ export function ChooseUs() {
             </ul>
             <div className="grid items-center gap-6 sm:grid-cols-2">
               <div className="relative aspect-[315/209] overflow-hidden rounded-[1.25rem]">
-                <Image src="/img/hero-solar.jpg" alt="Usina solar" fill sizes="377px" className="object-cover" />
+                <Image src={asset("/img/hero-solar.jpg")} alt="Usina solar" fill sizes="377px" className="object-cover" />
               </div>
               <p className="t-body m-0">
                 Unimos tecnologia e atendimento próximo para que casas, empresas e propriedades rurais gerem a

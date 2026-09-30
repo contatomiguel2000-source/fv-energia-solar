@@ -7,6 +7,7 @@ import { ServiceStack } from "@/components/ServiceStack";
 import { ChooseUs } from "@/components/ChooseUs";
 import { MissionVideo } from "@/components/MissionVideo";
 import { Counter, Reveal } from "@/components/Reveal";
+import { asset } from "@/lib/base-path";
 import {
   aboutImages,
   benefits,
@@ -150,7 +151,7 @@ export default function Home() {
           <div className={`${container} flex flex-col gap-[1.875rem] lg:flex-row lg:gap-20`}>
             <Reveal className="relative aspect-[630/815] w-full overflow-hidden rounded-[1.25rem] lg:flex-1">
               <Image
-                src="/img/p-piscina-igarata.jpg"
+                src={asset("/img/p-piscina-igarata.jpg")}
                 alt="Sistema fotovoltaico instalado pela FV Energia Solar"
                 fill
                 sizes="(min-width: 1024px) 675px, 100vw"
@@ -210,7 +211,7 @@ export default function Home() {
               </div>
 
               <div className="relative h-[30.9375rem] w-full [perspective:2000px] md:mr-auto md:w-[27%]">
-                <MissionVideo src="/video/VIDEO-USINA-02_1.mp4" />
+                <MissionVideo src={asset("/video/VIDEO-USINA-02_1.mp4")} />
                 <div className="mission-flip absolute inset-0 z-[1] rounded-[1.25rem] bg-ink max-md:hidden">
                   <div className="mission-flip-content flex h-full flex-col justify-center gap-[4.375rem] px-5 md:px-[4.5rem]">
                     {missionStats.map((s) => (
