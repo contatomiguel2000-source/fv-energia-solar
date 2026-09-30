@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+/* Identidade FV aplicada sobre o sistema do layout de referência */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-sun: #fbc51d; /* amarelo FV (destaque) */
+  --color-ember: #f39c12;
+  --color-ink: #1f211c; /* escuro FV */
+  --color-cream: #f1efe6; /* creme FV */
+  --color-beige: #eadfc4;
+  --color-gray-text: #414141;
+  --color-fv-blue: #0b4a94;
+  --font-sans: var(--font-inter-tight), "Inter Tight", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter-tight), "Inter Tight", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 162.5%;
+  letter-spacing: -0.01rem;
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Tipografia (valores do layout de referência em >=1280px) */
+.t-h1 {
+  font-size: clamp(2.5rem, 4.9vw, 4.375rem);
+  line-height: 108.571%;
+  font-weight: 500;
+  letter-spacing: -0.131rem;
+}
+.t-h2 {
+  font-size: clamp(1.875rem, 2.8vw, 2.5rem);
+  line-height: 125%;
+  font-weight: 500;
+  letter-spacing: -0.075rem;
+}
+.t-h4 {
+  font-size: clamp(1.375rem, 1.6vw, 1.437rem);
+  line-height: 143%;
+  font-weight: 500;
+  letter-spacing: -0.043rem;
+}
+.t-h5 {
+  font-size: clamp(1.125rem, 1.4vw, 1.25rem);
+  line-height: 150%;
+  font-weight: 500;
+  letter-spacing: -0.037rem;
+}
+.t-sub {
+  font-size: 0.875rem;
+  line-height: 171%;
+  font-weight: 500;
+  letter-spacing: -0.017rem;
+}
+.t-big {
+  font-size: clamp(4.5rem, 10vw, 12.5rem);
+  line-height: 100%;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+.t-body {
+  color: var(--color-gray-text);
+}
+
+/* Botão pílula com overlay e texto rolando */
+.btn {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  border-radius: 50px;
+  background: var(--color-sun);
+  border: 1px solid #fbc51d1a;
+  isolation: isolate;
+}
+.btn-overlay {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  z-index: 0;
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 50%;
+  background: var(--color-ink);
+  transform: translate(-50%, 0) scale(1);
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.btn:hover .btn-overlay {
+  transform: translate(-50%, -50%) scale(7);
+}
+.btn-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.15rem 1.25rem;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.018rem;
+}
+.btn-roll {
+  display: block;
+  height: 1.25em;
+  overflow: hidden;
+}
+.btn-roll > span {
+  display: block;
+  height: 1.25em;
+  line-height: 1.25em;
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.btn-roll > span:first-child {
+  color: #000;
+}
+.btn-roll > span:last-child {
+  color: #fff;
+}
+.btn:hover .btn-roll > span {
+  transform: translateY(-100%);
+}
+
+/* Revelação ao rolar */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero */
+.hero-slide {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.hero-slide.is-active {
+  opacity: 1;
+}
+.hero-slide img {
+  transform: scale(1.12);
+  transition: transform 7s ease-out;
+}
+.hero-slide.is-active img {
+  transform: scale(1);
+}
+.hero-copy {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s ease 0.3s,
+    transform 0.8s ease 0.3s;
+  pointer-events: none;
+}
+.hero-copy.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* Card 3D da missão */
+.mission-flip {
+  transform-origin: 100% 50%;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+.is-visible .mission-flip {
+  transform: rotateY(134deg);
+}
+.mission-flip-content {
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}
+
+/* Barras de crescimento */
+.bar-clip {
+  clip-path: polygon(0 0, 60% 0, 100% 60px, 100% 100%, 0% 100%);
+}
+.bar-grow {
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.is-visible .bar-grow {
+  transform: scaleY(1);
+}
+.bar-fade {
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+
+/* Depoimentos: colunas em rolagem infinita */
+@keyframes marquee-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+.marquee-col {
+  animation: marquee-up 38s linear infinite;
+}
+.marquee-col.reverse {
+  animation-direction: reverse;
+}
+.marquee-wrap:hover .marquee-col {
+  animation-play-state: paused;
+}
+.marquee-mask {
+  mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 72%, transparent 100%);
+}
+
+.big-fade {
+  background: linear-gradient(180deg, #cfcfcf 0%, #ffffff 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .hero-slide img,
+  .bar-grow,
+  .mission-flip {
+    transition: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .marquee-col,
+  .spin-slow {
+    animation: none;
+  }
+}
